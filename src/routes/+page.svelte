@@ -11,6 +11,7 @@
     <div class="hero bg-base-200">
         <div class="hero-content text-center">
             <div class="w-full">
+                <img src={`/custom.png`} alt="Icon" width="125" height="125" class="mx-auto"/>
                 <h1 class="text-7xl font-bold">Sharemefy</h1>
                 <p class="py-6 text-2xl">
                     One simple link to share your entire developer portfolio

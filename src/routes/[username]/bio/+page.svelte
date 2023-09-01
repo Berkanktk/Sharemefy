@@ -2,17 +2,25 @@
     import type { PageData } from "./$types";
     import { page } from "$app/stores";
     import { enhance } from "$app/forms";
+    import { userData } from "$lib/firebase";
 
     export let data: PageData;
 </script>
 
+{#if $userData?.username}
+<a href="/{$userData.username}/edit" class="btn btn-primary btn-md absolute right-4 top-4">Go Back</a>
+{:else}
+<a href="/login" class="btn btn-primary btn-md absolute right-4 top-4">Login</a>
+{/if}
+
 <main class="max-w-lg prose text-center mx-auto my-6">
-    <p>Current Bio: <span class="text-info">{data.bio}</span></p>
+    <h1 class="text-3xl font-bold">Edit Bio</h1>
+    <p class="mt-4">Current Bio: <span class="text-info">{data.bio}</span></p>
 
     <!-- <p>Status Code: {$page.status}</p> -->
     <p class="text-error">{$page.form?.problem ?? ""}</p>
 
-    <form method="POST" use:enhance>
+    <form class="mt-4" method="POST" use:enhance>
         <!-- Don't make a full page reload -->
         <div class="form-control">
             <label for="bio" class="label">

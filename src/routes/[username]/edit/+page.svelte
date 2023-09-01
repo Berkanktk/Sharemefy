@@ -27,7 +27,7 @@
     const formDefaults = {
       icon: "custom",
       title: "",
-      url: "https://",
+      url: "",
     };
     const formData = writable(formDefaults);
   
@@ -139,6 +139,9 @@
           />
         </label>
       </form>
+
+      <h1 class="mx-2 text-2xl font-bold my-4">Photo</h1>
+
   
       <img
       src={$userData?.photoURL ?? "/user.png"}
@@ -162,31 +165,36 @@
           <progress class="progress progress-info w-56 mt-6 mx-auto" />
         {/if}
       </div>
+
+      <h1 class="mx-2 text-2xl font-bold my-4">Bio</h1>
       
       <div class="text-center my-4">
-        <a class="btn btn-outline btn-xs" href={`/${$userData.username}/bio`}>Edit Bio</a>
+        <p class="text-info">{$userData?.bio}</p>
+        <a class="btn btn-outline btn-xs mt-2" href={`/${$userData.username}/bio`}>Edit Bio</a>
       </div>
      
-      <h1 class="mx-2 text-2xl font-bold my-4">Your Links</h1>
+      <h1 class="mx-2 text-2xl font-bold my-4">Links</h1>
 
       <SortableList list={$userData?.links} on:sort={sortList} let:item let:index>
         <div class="group relative">
           <UserLink {...item} />
           <button
             on:click={() => deleteLink(item)}
-            class="btn btn-xs btn-error invisible group-hover:visible transition-all absolute -right-6 bottom-10"
+            class="btn btn-sm btn-error invisible group-hover:visible absolute -right-6 bottom-10"
             >Delete</button
           >
         </div>
       </SortableList>
+
       {#if showForm}
-        <form
-          on:submit|preventDefault={addLink}
-          class="bg-base-200 p-6 w-full mx-auto rounded-xl"
-        >
+      <form
+      on:submit|preventDefault={addLink}
+      class="bg-base-200 p-6 w-full mx-auto rounded-xl"
+      >
+          <h1 class="text-2xl font-bold mb-4">Add Link</h1>
           <select
             name="icon"
-            class="select select-sm"
+            class="select select-sm block"
             bind:value={$formData.icon}
           >
 
@@ -198,35 +206,33 @@
             name="title"
             type="text"
             placeholder="Title"
-            class="input input-sm"
+            class="input input-sm block mt-2"
             bind:value={$formData.title}
           />
           <input
             name="url"
             type="text"
             placeholder="URL"
-            class="input input-sm"
+            class="input input-sm block mt-2"
             bind:value={$formData.url}
           />
           <div class="my-4">
-            {#if !titleIsValid}
+            {#if $formData.title.length > 0 && !titleIsValid}
               <p class="text-error text-xs">Must have valid title</p>
             {/if}
-            {#if !urlIsValid}
+            {#if $formData.url.length > 0 && !urlIsValid}
               <p class="text-error text-xs">Must have a valid URL</p>
             {/if}
-            {#if formIsValid}
+            <!-- {#if formIsValid && ($formData.title.length > 0 || $formData.url.length > 0)}
               <p class="text-success text-xs">Looks good!</p>
-            {/if}
+            {/if} -->
+          </div>
+          
+          <div class="flex mx-auto justify-center">
+            <button type="button" class="btn btn-error block mr-4" on:click={cancelLink}>Cancel</button>
+            <button disabled={!formIsValid}  type="submit" class="btn btn-success block">Add Link</button>
           </div>
   
-          <button
-            disabled={!formIsValid}
-            type="submit"
-            class="btn btn-success block">Add Link</button
-          >
-  
-          <button type="button" class="btn btn-xs my-4" on:click={cancelLink}>Cancel</button>
         </form>
       {:else}
         <button
