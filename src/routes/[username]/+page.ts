@@ -17,7 +17,7 @@ export const load = (async ({ params }) => {
   const data = snapshot.docs[0]?.data();
 
   if (!exists) {
-    throw error(404, "that user does not exist!");
+    throw error(404, `A user with name @${params.username} does not exist!`);
   }
 
   if (!data.published) {
