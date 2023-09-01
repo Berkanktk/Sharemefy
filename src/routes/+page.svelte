@@ -8,8 +8,8 @@
 </svelte:head>
 
 <main class="flex w-full min-h-screen">
-    <div class="hero bg-base-200">
-        <div class="hero-content text-center">
+    <div class="hero bg-base-200 flex justify-center items-start"> 
+        <div class="hero-content text-center mt-32"> 
             <div class="w-full">
                 <img src={`/custom.png`} alt="Icon" width="125" height="125" class="mx-auto"/>
                 <h1 class="text-7xl font-bold">Sharemefy</h1>
