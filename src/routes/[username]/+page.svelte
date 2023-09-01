@@ -25,6 +25,8 @@
     @{data.username}
   </h1>
 
+  <p>Joined {data.createdAt}</p>
+
   <p class="text-xl my-8">{data.bio ?? "No bio yet..."}</p>
   <ul class="list-none">
     {#each data.links as item}
