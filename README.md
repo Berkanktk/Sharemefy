@@ -1,6 +1,29 @@
-# create-svelte
+# Sharemefy
+A simple social link sharing platform built with Svelte and Firebase.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+## Features
+### Firebase Related
+* Storage bucket for storing images
+* Firestore for storing user data
+  * Strong rules for Firestore
+* Authentication with Google
+* Firebase JS SDK and Admin SDK
+
+### Svelte Related
+* Server Side Rendering
+* Search Engine Optimization
+* Data fetching and caching
+* Cookie based authentication
+* Routing
+* Svelte Animations
+* Svelte Actions
+* Svelte Hooks
+* Svelte Stores
+* Form Validation
+
+### UI Related
+* Tailwind CSS
+* DaisyUI
 
 ## Creating a project
 
@@ -36,3 +59,21 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+# Deployment
+
+```bash
+npm i -g firebase-tools
+
+firebase login
+
+firebase experiments:enable webframeworks
+
+firebase init hosting
+
+firebase deploy
+```
+
+# TODO
+- [ ] Login page should not be accessible if user is already logged in
+- [ ] Seperate login and signup pages
