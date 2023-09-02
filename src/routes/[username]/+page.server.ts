@@ -1,12 +1,13 @@
 import { collection, getDocs, limit, query, where } from "firebase/firestore";
-import type { PageLoad } from "./$types";
+import type { PageServerLoad } from "./$types";
 import { db } from "$lib/firebase";
 import { error } from "@sveltejs/kit";
 
-export const load = (async ({ params }) => {
+export const load = (async ({ params, locals }) => {
+
+  const uid = locals.userID;
     
   const collectionRef = collection(db, "users");
-
   const q = query(
     collectionRef,
     where("username", "==", params.username),
@@ -15,12 +16,13 @@ export const load = (async ({ params }) => {
   const snapshot = await getDocs(q);
   const exists = snapshot.docs[0]?.exists();
   const data = snapshot.docs[0]?.data();
+  const docId = snapshot.docs[0]?.id; // Get the document ID
 
   if (!exists) {
     throw error(404, `A user with name @${params.username} does not exist!`);
   }
 
-  if (!data.published) {
+  if (!data.published && docId !== uid) {
     throw error(403, `The profile of @${data.username} is not public!`);
   }
 
@@ -31,4 +33,4 @@ export const load = (async ({ params }) => {
     links: data.links ?? [],
     createdAt: data.createdAt,
   };
-}) satisfies PageLoad;
+}) satisfies PageServerLoad; 
