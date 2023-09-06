@@ -1,5 +1,7 @@
 # Sharemefy
-A simple social link sharing platform built with Svelte and Firebase.
+A simple social link sharing platform built with Svelte and Firebase. 
+
+> This is a test project to learn Svelte and Firebase
 
 ## Features
 ### Firebase Related
@@ -73,7 +75,3 @@ firebase init hosting
 
 firebase deploy
 ```
-
-# TODO
-- [ ] Login page should not be accessible if user is already logged in
-- [ ] Seperate login and signup pages
