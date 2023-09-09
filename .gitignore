@@ -12,3 +12,4 @@ service-account.json
 .env
 server/
 firebase.ts
+.firebase/
