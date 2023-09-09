@@ -10,6 +10,7 @@ A simple social link sharing platform built with Svelte and Firebase.
   * Strong rules for Firestore
 * Authentication with Google
 * Firebase JS SDK and Admin SDK
+* Deployed as Google Firebase Cloud Functions
 
 ### Svelte Related
 * Server Side Rendering
