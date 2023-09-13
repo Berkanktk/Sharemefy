@@ -1,6 +1,7 @@
 <script lang="ts">
   import UserLink from "$lib/components/UserLink.svelte";
   import type { PageData } from "./$types";
+  import { userData } from "$lib/firebase";
 
   export let data: PageData;
 </script>
@@ -12,7 +13,9 @@
 
 <main class="prose text-center mx-auto mt-2">
 
-  <a href="{data.username}/edit" class="btn btn-primary btn-md absolute right-4 top-4">Edit Profile</a>
+  {#if $userData?.username === data.username}
+    <a href="{data.username}/edit" class="btn btn-primary btn-md absolute right-4 top-4">Edit Profile</a>
+  {/if}
 
   <img
     src={data.photoURL ?? "/user.png"}
@@ -25,9 +28,9 @@
     @{data.username}
   </h1>
 
-  <p>Joined {data.createdAt}</p>
+  <p class="mt-1">Joined {data.createdAt}</p>
 
-  <p class="text-xl my-8">{data.bio ?? "No bio yet..."}</p>
+  <p class="text-xl mb-8 mt-4">{data.bio ?? "No bio yet..."}</p>
   <ul class="list-none">
     {#each data.links as item}
       <li class="my-4">
@@ -36,7 +39,9 @@
     {/each}
   </ul>
 
-  <a href={data.username+"/edit"} class="stack w-full max-w-md text-center bg-base-200 flex justify-center items-center p-4 rounded-lg not-prose no-underline">
-    <span class="text-lg text-white font-bold">+ Add New</span>
-  </a>
+  {#if $userData?.username === data.username}
+    <a href={data.username+"/edit"} class="stack w-full max-w-md text-center bg-base-200 flex justify-center items-center p-4 rounded-lg not-prose no-underline">
+      <span class="text-lg text-white font-bold">+ Add New</span>
+    </a>
+  {/if}
 </main>
