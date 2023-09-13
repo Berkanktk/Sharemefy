@@ -8,9 +8,10 @@ export const load = (async ({ params, locals }) => {
   const uid = locals.userID;
     
   const collectionRef = collection(db, "users");
+  const normalizedUsername = params.username.toLowerCase();
   const q = query(
     collectionRef,
-    where("username", "==", params.username),
+    where("username", "==", normalizedUsername),
     limit(1)
   );
   const snapshot = await getDocs(q);

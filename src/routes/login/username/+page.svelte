@@ -74,6 +74,10 @@
     username = "";
     isAvailable = false;
   }
+
+  function convertToLowerCase() {
+    username = username.toLowerCase();
+  }
 </script>
 
 <AuthCheck>
@@ -96,6 +100,7 @@
         class:input-error={!isValid && isTouched}
         class:input-warning={isTaken}
         class:input-success={isAvailable && isValid && !loading}
+        on:input={convertToLowerCase}
       />
       <div class="my-4 min-h-16 px-8 w-full">
         {#if loading}
