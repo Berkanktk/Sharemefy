@@ -21,7 +21,8 @@
     src={data.photoURL ?? "/user.png"}
     alt="photoURL"
     width="256"
-    class="mx-auto mt-8 rounded-full"
+    height="256"
+    class="mx-auto mt-8 rounded-full w-64 h-64 object-cover"
   />
 
   <h1 class="text-5xl text-purple-500 font-bold mt-5">
